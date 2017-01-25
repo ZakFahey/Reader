@@ -71,18 +71,20 @@ int getLineCount(string text)
 }
 
 //Puts book data into a book and returns whether it was successful
-bool readBookData(string filename, Book *book)
+Book readBookData(string filename)
 {
+	Book book;
 	ifstream stream;
 	stream.open(filename);
-	if (stream.fail())
+	while(stream.fail())
 	{
-		stream.close();
-		return false;
+		cout << "The file " << filename << " does not exist. Enter a valid filename:" << endl;
+		cin >> filename;
+		stream.open(filename);
 	}
 	//TODO: read contents into book
-	//You need to reference book with the -> symbol. Ex: book->authorFirstName = "Test";
 	stream.close();
+	return book;
 }
 
 //Saves a book to CardCatalog.txt
@@ -98,12 +100,7 @@ void analyzeBook()
 	cout << "What file do you want to read?" << endl;
 	cin >> input;
 	bool success = false;
-	Book book;
-	if (!readBookData(input, &book))
-	{
-		cout << "The file " << input << " does not exist!";
-		return;
-	}
+	Book book = readBookData(input);
 	saveBookData(book);
 	cout << "Do you want to see the letter distribution?";
 	cin >> input;
