@@ -1,0 +1,8 @@
+﻿  Reader.cpp
+c:\users\zak\google drive\school\data structures\reader\reader.cpp(18): warning C4018: '<': signed/unsigned mismatch
+c:\users\zak\google drive\school\data structures\reader\reader.cpp(20): warning C4018: '<': signed/unsigned mismatch
+c:\users\zak\google drive\school\data structures\reader\reader.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\zak\google drive\school\data structures\reader\reader.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\zak\google drive\school\data structures\reader\reader.cpp(51): warning C4018: '<': signed/unsigned mismatch
+  Reader.vcxproj -> C:\Users\Zak\Google Drive\School\Data Structures\Reader\Debug\Reader.exe
+  Reader.vcxproj -> C:\Users\Zak\Google Drive\School\Data Structures\Reader\Debug\Reader.pdb (Full PDB)
