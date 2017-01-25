@@ -2,11 +2,23 @@
 //It's important that these are included
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 //These variables can be referenced at any point for these 2 methods
 string letters("abcdefghijklmnopqrstuvwxyz");
 string uppercaseLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+struct Book
+{
+public:
+	string title;
+	string authorFirstName;
+	string authorLastName;
+	int characters;
+	double letterFrequency[26];
+	int lineCount;
+};
 
 double* getLetterDistribution(string text)
 {
@@ -37,7 +49,7 @@ double* getLetterDistribution(string text)
 	return distribution;
 }
 
-void printLetterDistribution(double* distribution)
+void printLetterDistribution(double distribution[26])
 {
 	for (int i = 0; i < letters.length(); i++)
 	{
@@ -58,11 +70,60 @@ int getLineCount(string text)
 	return count;
 }
 
-//For testing. Do not include in the actual assignment.
+//Puts book data into a book and returns whether it was successful
+bool readBookData(string filename, Book *book)
+{
+	ifstream stream;
+	stream.open(filename);
+	if (stream.fail())
+	{
+		stream.close();
+		return false;
+	}
+	//TODO: read contents into book
+	//You need to reference book with the -> symbol. Ex: book->authorFirstName = "Test";
+	stream.close();
+}
+
+//Saves a book to CardCatalog.txt
+void saveBookData(Book book)
+{
+	//TODO
+}
+
+//Method containing all the main code for the assignment
+void analyzeBook()
+{
+	string input;
+	cout << "What file do you want to read?" << endl;
+	cin >> input;
+	bool success = false;
+	Book book;
+	if (!readBookData(input, &book))
+	{
+		cout << "The file " << input << " does not exist!";
+		return;
+	}
+	saveBookData(book);
+	cout << "Do you want to see the letter distribution?";
+	cin >> input;
+	if (input == "Yes" || input == "yes")
+	{
+		printLetterDistribution(book.letterFrequency);
+	}
+}
+
 int main()
 {
-	string text = "This is a test. I love tests. Tests are the best thing.";
-	double* distribution = getLetterDistribution(text);
-	cout << "Lines: " << getLineCount(text) << endl;
-	printLetterDistribution(distribution);
+	while (true)
+	{
+		analyzeBook();
+		string answer;
+		cout << "Would you like to process another book?" << endl;
+		cin >> answer;
+		if (answer == "Yes" || answer == "yes")
+		{
+			break;
+		}
+	}
 }
