@@ -1,8 +1,8 @@
 ﻿  Reader.cpp
-c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(28): warning C4018: '<': signed/unsigned mismatch
-c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(30): warning C4018: '<': signed/unsigned mismatch
-c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(61): warning C4018: '<': signed/unsigned mismatch
-c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(85): warning C4018: '<': signed/unsigned mismatch
-c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(143): warning C4018: '<': signed/unsigned mismatch
-  Reader.vcxproj -> C:\Users\DaVucci\Documents\Visual Studio 2017\Projects\Reader\Debug\Reader.exe
-  Reader.vcxproj -> C:\Users\DaVucci\Documents\Visual Studio 2017\Projects\Reader\Debug\Reader.pdb (Partial PDB)
+c:\users\davucci\reader\reader\reader.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\reader\reader\reader.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\reader\reader\reader.cpp(60): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\reader\reader\reader.cpp(84): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\reader\reader\reader.cpp(142): warning C4018: '<': signed/unsigned mismatch
+  Reader.vcxproj -> C:\Users\DaVucci\Reader\Reader\Debug\Reader.exe
+  Reader.vcxproj -> C:\Users\DaVucci\Reader\Reader\Debug\Reader.pdb (Partial PDB)

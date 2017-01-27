@@ -7,8 +7,6 @@
 using namespace std;
 
 int distributionCount[26];
-string letters = "abcdefghijklmnopqrstuvwxyz";
-string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 struct Book
 {
@@ -24,6 +22,8 @@ public:
 // Add to distribution total
 void getLetterDistribution(string text)
 {
+	string letters = "abcdefghijklmnopqrstuvwxyz";
+	string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	//First get the count of each letter
 	for (int i = 0; i < text.length(); i++)
 	{
@@ -57,6 +57,7 @@ Book calcLetterDistribution(Book bookStruct)
 //Prints letter distribution
 void printLetterDistribution(double distribution[26])
 {
+	string letters = "abcdefghijklmnopqrstuvwxyz";
 	for (int i = 0; i < letters.length(); i++)
 	{
 		cout << letters[i] << ": " << distribution[i] << "%" << endl;
@@ -70,7 +71,7 @@ Book readBookData(string filename)
 	Book book;
 	ifstream stream;
 	stream.open(filename);
-	while(stream.fail())
+	while (stream.fail())
 	{
 		cout << "The file " << filename << " does not exist. Enter a valid filename:" << endl;
 		cin >> filename;
@@ -110,6 +111,7 @@ Book readBookData(string filename)
 	{
 		distributionCount[i] = 0;
 	}
+	book.lineCount = 0;
 	while (true)
 	{
 		getline(stream, line);
@@ -138,6 +140,7 @@ void saveBookData(Book book)
 	write << "Character Count: " << book.characters << endl << endl;
 	write << "Line Count: " << book.lineCount << endl << endl;
 	write << "Character Frequency: " << endl;
+	string letters = "abcdefghijklmnopqrstuvwxyz";
 	for (int i = 0; i < letters.length(); i++)
 	{
 		write << letters[i] << ": " << book.letterFrequency[i] << "%" << endl;
