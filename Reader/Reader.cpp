@@ -7,6 +7,8 @@
 using namespace std;
 
 int distributionCount[26];
+string letters = "abcdefghijklmnopqrstuvwxyz";
+string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 struct Book
 {
@@ -22,8 +24,6 @@ public:
 // Add to distribution total
 void getLetterDistribution(string text)
 {
-	string letters = "abcdefghijklmnopqrstuvwxyz";
-	string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	//First get the count of each letter
 	for (int i = 0; i < text.length(); i++)
 	{
@@ -57,7 +57,6 @@ Book calcLetterDistribution(Book bookStruct)
 //Prints letter distribution
 void printLetterDistribution(double distribution[26])
 {
-	string letters = "abcdefghijklmnopqrstuvwxyz";
 	for (int i = 0; i < letters.length(); i++)
 	{
 		cout << letters[i] << ": " << distribution[i] << "%" << endl;
@@ -139,7 +138,6 @@ void saveBookData(Book book)
 	write << "Character Count: " << book.characters << endl << endl;
 	write << "Line Count: " << book.lineCount << endl << endl;
 	write << "Character Frequency: " << endl;
-	string letters = "abcdefghijklmnopqrstuvwxyz";
 	for (int i = 0; i < letters.length(); i++)
 	{
 		write << letters[i] << ": " << book.letterFrequency[i] << "%" << endl;
