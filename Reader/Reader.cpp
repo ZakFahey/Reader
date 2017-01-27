@@ -8,6 +8,7 @@ using namespace std;
 
 int distributionCount[26];
 
+// Zak: Book Structure
 struct Book
 {
 public:
@@ -19,17 +20,17 @@ public:
 	int lineCount;
 };
 
-// Add to distribution total
+// Evan: Add to distribution total
 void getLetterDistribution(string text)
 {
 	string letters = "abcdefghijklmnopqrstuvwxyz";
 	string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	//First get the count of each letter
+	// Zak: First get the count of each letter
 	for (int i = 0; i < text.length(); i++)
 	{
 		for (int j = 0; j < letters.length(); j++)
 		{
-			//Include both uppercase and lowercase characters for each letter
+			// Zak: Include both uppercase and lowercase characters for each letter
 			if (text[i] == letters[j] || text[i] == uppercaseLetters[j])
 			{
 				distributionCount[j]++;
@@ -39,7 +40,7 @@ void getLetterDistribution(string text)
 	}
 }
 
-// Calculate values in letterFrequency
+// Evan: Calculate values in letterFrequency
 Book calcLetterDistribution(Book bookStruct)
 {
 	bookStruct.characters = 0;
@@ -54,7 +55,7 @@ Book calcLetterDistribution(Book bookStruct)
 	return bookStruct;
 }
 
-//Prints letter distribution
+// Zak: Prints letter distribution
 void printLetterDistribution(double distribution[26])
 {
 	string letters = "abcdefghijklmnopqrstuvwxyz";
@@ -65,7 +66,7 @@ void printLetterDistribution(double distribution[26])
 }
 
 
-//Puts book data into a book and returns whether it was successful
+// Zak: Puts book data into a book and returns whether it was successful
 Book readBookData(string filename)
 {
 	Book book;
@@ -77,7 +78,7 @@ Book readBookData(string filename)
 		cin >> filename;
 		stream.open(filename);
 	}
-	// Reads the metadata into the Book struct
+	// Evan: Reads the metadata into the Book struct
 	getline(stream, book.title);
 	string fullName;
 	getline(stream, fullName);
@@ -96,7 +97,7 @@ Book readBookData(string filename)
 	}
 
 	string line;
-	// Skip "Contents:" header
+	// Evan: Skip "Contents:" header
 	while (true)
 	{
 		getline(stream, line);
@@ -106,7 +107,7 @@ Book readBookData(string filename)
 		}
 	}
 
-	// Save letter distrubution
+	// Evan: Save letter distrubution
 	for (int i = 0; i < sizeof(distributionCount); i++)
 	{
 		distributionCount[i] = 0;
@@ -128,7 +129,7 @@ Book readBookData(string filename)
 	return book;
 }
 
-// Saves a book to CardCatalog.txt
+// Evan: Saves a book to CardCatalog.txt
 void saveBookData(Book book)
 {
 	ofstream write;
@@ -149,7 +150,7 @@ void saveBookData(Book book)
 	write.close();
 }
 
-//Method containing all the main code for the assignment
+// Zak: Method containing all the main code for the assignment
 void analyzeBook()
 {
 	string input;
@@ -166,6 +167,7 @@ void analyzeBook()
 	}
 }
 
+// Zak: Main function
 int main()
 {
 	while (true)
