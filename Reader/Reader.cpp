@@ -2,12 +2,11 @@
 //It's important that these are included
 #include <string>
 #include <iostream>
+#include <cctype>
 #include <fstream>
 using namespace std;
 
-//These variables can be referenced at any point for these 2 methods
-string letters("abcdefghijklmnopqrstuvwxyz");
-string uppercaseLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+int distributionCount[26];
 
 struct Book
 {
@@ -20,55 +19,51 @@ public:
 	int lineCount;
 };
 
-double* getLetterDistribution(string text)
+// Add to distribution total
+void getLetterDistribution(string text)
 {
-	double* distribution = new double[26]();
-	int totalLetters = 0;
-	if(text.length() > 0) //Prevents a divide by zero error
+	string letters = "abcdefghijklmnopqrstuvwxyz";
+	string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	//First get the count of each letter
+	for (int i = 0; i < text.length(); i++)
 	{
-		//First get the count of each letter
-		for (int i = 0; i < text.length(); i++)
+		for (int j = 0; j < letters.length(); j++)
 		{
-			for (int j = 0; j < letters.length(); j++)
+			//Include both uppercase and lowercase characters for each letter
+			if (text[i] == letters[j] || text[i] == uppercaseLetters[j])
 			{
-				//Include both uppercase and lowercase characters for each letter
-				if (text[i] == letters[j] || text[i] == uppercaseLetters[j])
-				{
-					distribution[j]++;
-					totalLetters++;
-					break;
-				}
+				distributionCount[j]++;
+				break;
 			}
 		}
-		//Turn the count into a percentage
-		for (int i = 0; i < letters.length(); i++)
-		{
-			distribution[i] *= (double)100 / totalLetters;
-		}
 	}
-	return distribution;
 }
 
+// Calculate values in letterFrequency
+Book calcLetterDistribution(Book bookStruct)
+{
+	bookStruct.characters = 0;
+	for (int i = 0; i < sizeof(distributionCount); i++)
+	{
+		bookStruct.characters += distributionCount[i];
+	}
+	for (int i = 0; i < sizeof(distributionCount); i++)
+	{
+		bookStruct.letterFrequency[i] = (double)100 * ((double)distributionCount[i] / (double)bookStruct.characters);
+	}
+	return bookStruct;
+}
+
+//Prints letter distribution
 void printLetterDistribution(double distribution[26])
 {
+	string letters = "abcdefghijklmnopqrstuvwxyz";
 	for (int i = 0; i < letters.length(); i++)
 	{
-		cout << letters[i] << " - " << distribution[i] << "%" << endl;
+		cout << letters[i] << ": " << distribution[i] << "%" << endl;
 	}
 }
 
-int getLineCount(string text)
-{
-	int count = 1;
-	for (int c = 0; c < text.length(); c++)
-	{
-		if (text[c] == '\n')
-		{
-			count++;
-		}
-	}
-	return count;
-}
 
 //Puts book data into a book and returns whether it was successful
 Book readBookData(string filename)
@@ -82,15 +77,75 @@ Book readBookData(string filename)
 		cin >> filename;
 		stream.open(filename);
 	}
-	//TODO: read contents into book
+	// Reads the metadata into the Book struct
+	getline(stream, book.title);
+	string fullName;
+	getline(stream, fullName);
+	bool space = false;
+	for (int i = 0; i < fullName.length(); i++)
+	{
+		if (isalpha(fullName[i]) && !space)
+		{
+			book.authorFirstName += fullName[i];
+		}
+		else
+		{
+			book.authorLastName += fullName[i];
+			space = true;
+		}
+	}
+
+	string line;
+	// Skip "Contents:" header
+	while (true)
+	{
+		getline(stream, line);
+		if (line == "Contents:" || line == "Contents: ")
+		{
+			break;
+		}
+	}
+
+	// Save letter distrubution
+	for (int i = 0; i < sizeof(distributionCount); i++)
+	{
+		distributionCount[i] = 0;
+	}
+	while (true)
+	{
+		getline(stream, line);
+		if (stream.fail())
+		{
+			break;
+		}
+		getLetterDistribution(line);
+		book.lineCount++;
+	}
+	book = calcLetterDistribution(book);
+
 	stream.close();
 	return book;
 }
 
-//Saves a book to CardCatalog.txt
+// Saves a book to CardCatalog.txt
 void saveBookData(Book book)
 {
-	//TODO
+	ofstream write;
+	write.open("CardCatalog.txt", ios::ate);
+	write << "Title: " << book.title << endl << endl;
+	write << "Full Author: " << book.authorFirstName << " " << book.authorLastName << endl << endl;
+	write << "Author First Name: " << book.authorFirstName << endl << endl;
+	write << "Author Last Name: " << book.authorLastName << endl << endl;
+	write << "Character Count: " << book.characters << endl << endl;
+	write << "Line Count: " << book.lineCount << endl << endl;
+	write << "Character Frequency: " << endl;
+	string letters = "abcdefghijklmnopqrstuvwxyz";
+	for (int i = 0; i < letters.length(); i++)
+	{
+		write << letters[i] << ": " << book.letterFrequency[i] << "%" << endl;
+	}
+
+	write.close();
 }
 
 //Method containing all the main code for the assignment
@@ -118,7 +173,7 @@ int main()
 		string answer;
 		cout << "Would you like to process another book?" << endl;
 		cin >> answer;
-		if (answer == "Yes" || answer == "yes")
+		if (!(answer == "Yes" || answer == "yes"))
 		{
 			break;
 		}

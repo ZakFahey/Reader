@@ -1,8 +1,8 @@
 ﻿  Reader.cpp
-c:\users\zak\google drive\school\data structures\reader\reader.cpp(18): warning C4018: '<': signed/unsigned mismatch
-c:\users\zak\google drive\school\data structures\reader\reader.cpp(20): warning C4018: '<': signed/unsigned mismatch
-c:\users\zak\google drive\school\data structures\reader\reader.cpp(32): warning C4018: '<': signed/unsigned mismatch
-c:\users\zak\google drive\school\data structures\reader\reader.cpp(42): warning C4018: '<': signed/unsigned mismatch
-c:\users\zak\google drive\school\data structures\reader\reader.cpp(51): warning C4018: '<': signed/unsigned mismatch
-  Reader.vcxproj -> C:\Users\Zak\Google Drive\School\Data Structures\Reader\Debug\Reader.exe
-  Reader.vcxproj -> C:\Users\Zak\Google Drive\School\Data Structures\Reader\Debug\Reader.pdb (Full PDB)
+c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\davucci\documents\visual studio 2017\projects\reader\reader.cpp(143): warning C4018: '<': signed/unsigned mismatch
+  Reader.vcxproj -> C:\Users\DaVucci\Documents\Visual Studio 2017\Projects\Reader\Debug\Reader.exe
+  Reader.vcxproj -> C:\Users\DaVucci\Documents\Visual Studio 2017\Projects\Reader\Debug\Reader.pdb (Partial PDB)
